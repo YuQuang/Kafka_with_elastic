@@ -1,0 +1,32 @@
+version: '2'
+services:
+  logstash:
+    image: ${LOGSTASH_IMAGE}
+    container_name: logstash
+    ports:
+      - '${LOGSTASH_PORT}:${LOGSTASH_PORT}'
+    volumes:
+      - ./kafka-to-es.conf:/usr/share/logstash/pipeline/kafka-to-es.conf
+    environment:
+      - LOGSTASH_ELASTIC_IP=${LOGSTASH_ELASTIC_IP}
+      - ELASTICSEARCH_PORT=${ELASTICSEARCH_PORT}
+      - ELASTICSEARCH_PWD=${ELASTICSEARCH_PWD}
+      - ELASTICSEARCH_USER=${ELASTICSEARCH_USER}
+    healthcheck:
+      test: curl -s http://elasticsearch:9200 || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      - contorller
+      - broker
+      - elasticsearch
+    networks:
+      - kafka
+      - elastic
+
+networks:
+  kafka:
+    external: true
+  elastic:
+    external: true

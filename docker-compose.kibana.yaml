@@ -1,0 +1,26 @@
+version: '2'
+services:
+  kibana:
+    image: ${KIBANA_IMAGE}
+    hostname: kibana
+    container_name: kibana
+    ports:
+      - '${KIBANA_PORT}:5601'
+    environment:
+      ELASTICSEARCH_HOSTS: 'http://elasticsearch:9200'
+      SERVER_NAME: 'kibana'
+      XPACK_MONITORING_ENABLED: 'true'
+      XPACK_SECURITY_ENABLED: 'true'
+    healthcheck:
+      test: curl -s http://elasticsearch:9200 || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic
+
+networks:
+  elastic:
+    external: true

@@ -1,0 +1,8 @@
+version: '2'
+networks:
+  kafka:
+    name: kafka
+    driver: bridge
+  elastic:
+    name: elastic
+    driver: bridge
