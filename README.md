@@ -12,6 +12,7 @@ docker-compose \
 -f docker-compose.kibana.yaml \
 -f docker-compose.kafka.yaml \
 -f docker-compose.elastic.yaml \
+-f docker-compose.kafkaui.yaml \
 -f docker-compose.networks.yaml \
 up
 ```
@@ -22,6 +23,7 @@ docker-compose `
 -f docker-compose.kibana.yaml `
 -f docker-compose.kafka.yaml `
 -f docker-compose.elastic.yaml `
+-f docker-compose.kafkaui.yaml `
 -f docker-compose.networks.yaml `
 up
 ```
