@@ -1,4 +1,3 @@
-version: '2'
 services:
   logstash:
     image: ${LOGSTASH_IMAGE}
@@ -18,8 +17,7 @@ services:
       timeout: 5s
       retries: 5
     depends_on:
-      - contorller
-      - broker
+      - controller
       - elasticsearch
     networks:
       - kafka

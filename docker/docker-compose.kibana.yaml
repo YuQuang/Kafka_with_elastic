@@ -1,4 +1,3 @@
-version: '2'
 services:
   kibana:
     image: ${KIBANA_IMAGE}
